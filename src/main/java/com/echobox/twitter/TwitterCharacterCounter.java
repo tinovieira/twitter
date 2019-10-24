@@ -8,12 +8,15 @@ import java.util.regex.Pattern;
 
 public class TwitterCharacterCounter {
 
+    private static final int SHORT_URL_LENGTH = 23;
     private static final String QUALIFIED_URL_REGEX =
             "((https?)://)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)";
 
+    private Pattern pattern;
 
-    // it will changed
-    private static final int SHORT_URL_LENGTH = 23;
+    public TwitterCharacterCounter() {
+        this.pattern = Pattern.compile(QUALIFIED_URL_REGEX);
+    }
 
     public int getCount(String stringToCount) {
         final List<String> urls = findQualifiedUrls(stringToCount);
@@ -29,12 +32,12 @@ public class TwitterCharacterCounter {
 
     private List<String> findQualifiedUrls(String stringToCount) {
         final List<String> urls = new ArrayList<>();
-        Pattern pattern = Pattern.compile(QUALIFIED_URL_REGEX);
-        Matcher matcher = pattern.matcher(stringToCount);
+        final Matcher matcher = pattern.matcher(stringToCount);
 
         while (matcher.find()) {
             urls.add(matcher.group());
         }
+
         return urls;
     }
 
