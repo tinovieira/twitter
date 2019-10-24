@@ -34,6 +34,13 @@ public class TwitterCharacterCounterTest {
     }
 
     @Test
+    public void testForStringWithUrlAndHttpsAndUserPass() {
+        String tweet = "https://user:pass@bit.ly/1IifCDF";
+        TwitterCharacterCounter counter = new TwitterCharacterCounter();
+        Assert.assertEquals(23, counter.getCount(tweet));
+    }
+
+    @Test
     public void testForStringWithUrlWithoutProtocol() {
         String tweet = "bit.ly/1IifCDF";
         TwitterCharacterCounter counter = new TwitterCharacterCounter();
@@ -51,7 +58,7 @@ public class TwitterCharacterCounterTest {
     public void testForStringWithTwoUrls() {
         String tweet = "bit.ly/1IifCDF and http://bit.ly/1IifCDF";
         TwitterCharacterCounter counter = new TwitterCharacterCounter();
-        Assert.assertEquals(51, counter.getCount(tweet));
+        Assert.assertEquals(58, counter.getCount(tweet));
     }
 
     @Test

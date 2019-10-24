@@ -16,7 +16,7 @@ NFC stands for Normalisation form C. However even then its not that simple.
 Twitter will shorten urls to some form of `t.co`.
 There is a JSON file that you can `GET` (`https://api.twitter.com/1.1/help/configuration.json`)
 which contains a property `"short_url_length"` which will give you the currently
-configured length of `t.co` url shortend string.
+configured length of `t.co` url shorted string.
 
 ### The rules regarding twitter URL shortening: ###
 
@@ -28,8 +28,10 @@ configured length of `t.co` url shortend string.
 
 I do not have a twitter oath access token so I cannot fetch the configuration details to get the `"short_url_length"`, therefore for this exercise I will use 23 as default.
 
-This regex: `((https?):\/\/)?([\w\d\-]+\.)+\w{2,}(\/.+)?` will be used
-
+This regex: `((https?)://)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)` will be used
+## incomplete ##
+- the regex must by fine tuned
+- the test `testForStringWithUnParsableUrls` is failing because the url are unparsable but the regex are parsing with two urls
 Links:
 
 - [twitter configuration docs](https://developer.twitter.com/en/docs/developer-utilities/configuration/api-reference/get-help-configuration)
